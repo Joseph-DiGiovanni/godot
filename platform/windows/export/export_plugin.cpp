@@ -516,6 +516,8 @@ Error EditorExportPlatformWindows::_rcedit_add_data(const Ref<EditorExportPreset
 	// On non-Windows we need WINE to run rcedit
 	args.push_front(rcedit_path);
 	rcedit_path = wine_path;
+	OS::get_singleton()->set_environment("WINEDEBUG", "-all"); // Disable wine debug messages
+	OS::get_singleton()->set_environment("WINEDLLOVERRIDES", "mscoree="); // Prevent wine-mono install prompt on first run
 #endif
 
 	String str;
